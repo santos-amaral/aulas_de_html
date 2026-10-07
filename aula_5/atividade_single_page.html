@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Atividade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Aprendizado — Truco Cego</title>
 
 <!-- fonte ideal para títulos e destaques exagerados, letra cursiva e sofisticada -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,53 +20,273 @@ font-style: normal; -->
   font-style: normal; -->
 
 <style>
-table{
-    border:solid rgb(172, 169, 10);
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}    
-td,th{
-    border:solid rgb(5, 90, 31);
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
+    :root{
+        --verde-escuro:#123c2a;
+        --verde:#1f6b48;
+        --verde-claro:#eaf4ee;
+        --dourado:#d4a72c;
+        --dourado-claro:#fff5cf;
+        --vermelho:#a92d2d;
+        --vermelho-claro:#fff0f0;
+        --creme:#f7f3e8;
+        --branco:#ffffff;
+        --texto:#25302a;
+        --sombra:0 10px 30px rgba(18,60,42,.12);
+    }
 
-h1 {
-    font-family: "Felipa", serif;
-    font-weight: 400;
-    font-style: normal;
-    text-align: center;
-    background-color: rgb(250, 234, 10);
-    color: rgba(255, 2, 2, 0.829);
-}
+    *{
+        box-sizing:border-box;
+    }
 
-h2 {
-    background-color: rgb(30, 126, 6);
-    font-family:"Kanit", sans-serif;
-    font-weight:500;
-    font-style:normal;
-    text-align: right;
-}
+    html{
+        scroll-behavior:smooth;
+    }
 
-img th{
-    width: 300px;
-    height: 200px;
-}
+    body{
+        margin:0;
+        background:
+            radial-gradient(circle at top left, rgba(212,167,44,.13), transparent 30%),
+            linear-gradient(135deg,#f5f1e5 0%,#eef5ef 100%);
+        color:var(--texto);
+        font-family:"Kanit", Arial, sans-serif;
+        line-height:1.7;
+    }
 
-p, ol, li {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-h3{
-    background-color: rgba(202, 10, 10, 0.884);
-}
+    body::before{
+        content:"♠  ♣  ♦  ♥";
+        display:block;
+        padding:14px;
+        text-align:center;
+        background:var(--verde-escuro);
+        color:#f8df83;
+        font-size:22px;
+        letter-spacing:16px;
+    }
 
+    h1{
+        max-width:1100px;
+        margin:38px auto 10px;
+        padding:28px 25px;
+        border-radius:20px;
+        background:linear-gradient(135deg,var(--verde-escuro),var(--verde));
+        color:#fff;
+        font-family:"Felipa",serif;
+        font-size:clamp(2rem,5vw,3.5rem);
+        font-weight:400;
+        line-height:1.15;
+        text-align:center;
+        box-shadow:var(--sombra);
+        text-shadow:2px 3px 0 rgba(0,0,0,.16);
+    }
 
+    h1 u{
+        text-decoration:none;
+    }
+
+    h2{
+        max-width:1100px;
+        margin:42px auto 18px;
+        padding:15px 22px;
+        border-left:7px solid var(--dourado);
+        border-radius:10px;
+        background:var(--verde-escuro);
+        color:#fff;
+        font-family:"Kanit",sans-serif;
+        font-size:1.65rem;
+        font-weight:600;
+        text-align:left;
+        box-shadow:0 5px 15px rgba(18,60,42,.10);
+    }
+
+    h3{
+        max-width:1050px;
+        margin:30px auto 12px;
+        padding:12px 18px;
+        border-radius:10px;
+        background:linear-gradient(90deg,var(--vermelho),#c44949);
+        color:#fff;
+        font-size:1.25rem;
+        letter-spacing:.5px;
+        box-shadow:0 4px 12px rgba(169,45,45,.15);
+    }
+
+    p, ol, li{
+        font-family:"Kanit",Arial,sans-serif;
+        font-weight:400;
+    }
+
+    body > p,
+    body > ol{
+        max-width:1000px;
+        margin:15px auto;
+        padding:0 20px;
+    }
+
+    ol{
+        padding-left:48px;
+    }
+
+    li{
+        margin:7px 0;
+    }
+
+    li::marker{
+        color:var(--verde);
+        font-weight:700;
+    }
+
+    b{
+        color:var(--verde-escuro);
+    }
+
+    table{
+        width:min(100% - 40px,1050px);
+        margin:22px auto;
+        border-collapse:separate;
+        border-spacing:0;
+        overflow:hidden;
+        border:1px solid rgba(31,107,72,.25);
+        border-radius:14px;
+        background:var(--branco);
+        box-shadow:var(--sombra);
+        text-align:center;
+    }
+
+    th,td{
+        padding:13px 15px;
+        border-right:1px solid rgba(31,107,72,.15);
+        border-bottom:1px solid rgba(31,107,72,.15);
+        font-family:"Kanit",Arial,sans-serif;
+        font-weight:400;
+        text-align:center;
+        vertical-align:middle;
+    }
+
+    th{
+        background:var(--verde-escuro);
+        color:#fff;
+        font-weight:600;
+    }
+
+    tr:nth-child(even) td{
+        background:#f6faf7;
+    }
+
+    tr:hover td{
+        background:#fff8df;
+        transition:.2s ease;
+    }
+
+    th:last-child,td:last-child{
+        border-right:none;
+    }
+
+    tr:last-child td{
+        border-bottom:none;
+    }
+
+    img{
+        max-width:100%;
+        height:auto;
+        border-radius:12px;
+        object-fit:contain;
+    }
+
+    table img{
+        display:block;
+        margin:auto;
+        max-height:400px;
+        box-shadow:0 8px 20px rgba(0,0,0,.12);
+    }
+
+    table td center{
+        color:#59645e;
+        font-size:.95rem;
+    }
+
+    /* Destaques */
+    h3 + ol{
+        max-width:1000px;
+        margin:0 auto;
+        padding:18px 45px 18px 58px;
+        background:var(--vermelho-claro);
+        border-left:5px solid var(--vermelho);
+        border-radius:0 12px 12px 0;
+    }
+
+    h3 + p{
+        max-width:1000px;
+        margin:0 auto 18px;
+    }
+
+    /* Área das imagens de modalidades */
+    table img[src*="dupla"],
+    table img[src*="quarteto"],
+    table img[src*="sexteto"]{
+        width:200px;
+        height:200px;
+        object-fit:contain;
+        box-shadow:none;
+    }
+
+    /* Caixa de atenção */
+    h3:has(+ p center){
+        text-align:center;
+        background:linear-gradient(90deg,var(--dourado),#e3bd54);
+        color:var(--verde-escuro);
+    }
+
+    /* Responsividade */
+    @media (max-width:700px){
+        body::before{
+            letter-spacing:7px;
+            font-size:17px;
+        }
+
+        h1{
+            margin:22px 14px 10px;
+            padding:22px 15px;
+        }
+
+        h2{
+            margin:28px 14px 15px;
+            font-size:1.35rem;
+        }
+
+        h3{
+            margin:22px 14px 10px;
+        }
+
+        body > p,
+        body > ol{
+            padding:0 18px;
+        }
+
+        table{
+            width:calc(100% - 28px);
+            font-size:.9rem;
+            overflow-x:auto;
+            display:table;
+        }
+
+        th,td{
+            padding:9px 7px;
+        }
+
+        ol{
+            padding-left:38px;
+        }
+    }
+
+    /* Pequenos efeitos visuais */
+    a{
+        color:var(--verde);
+    }
+
+    ::selection{
+        background:#f0d675;
+        color:var(--verde-escuro);
+    }
 </style>    
 
 </head>
@@ -118,7 +339,7 @@ Estas primeiras 4 são as cartas <u>ESPECIAIS</u> do jogo, também conhecidas co
 <li>TODOS os 2</li>
 <li>o RESTO dos 1</li>
 "O resto", pois não são TODOS os 1.
-<br> Lembra que já citamos dois uns lá em cima, nas manilhas? Aqui embaixo temos o RESTO, que são o 1 DE PAUS e o 1 DE COPAS.
+<br> Lembra que já citamos dois uns lá em cima, nas manilhas? Aqui embaixo temos o RESTO, que são o 1 DE OUROS e o 1 DE COPAS.
 <li>TODOS os 12(figura dos reis)</li>
 <li>TODOS os 11(FIGURA dos cavalos)</li>
 <li>TODOS os 10(figura dos sotas)</li>
