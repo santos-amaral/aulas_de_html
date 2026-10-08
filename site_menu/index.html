@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Aprendizado — Truco Cego</title>
+
+<!-- fonte ideal para títulos e destaques exagerados, letra cursiva e sofisticada -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet">
+<!-- font-family: "Felipa", serif;
+font-weight: 400;
+font-style: normal; -->
+
+<!-- fonte ideal para o texto geral, calmo-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Felipa&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><!-- font-family: "Kanit", sans-serif;
+  font-weight: 900;
+  font-style: normal; -->
+
+<style>
+    :root{
+        --verde-escuro:#123c2a;
+        --verde:#1f6b48;
+        --verde-claro:#eaf4ee;
+        --dourado:#d4a72c;
+        --dourado-claro:#fff5cf;
+        --vermelho:#a92d2d;
+        --vermelho-claro:#fff0f0;
+        --creme:#f7f3e8;
+        --branco:#ffffff;
+        --texto:#25302a;
+        --sombra:0 10px 30px rgba(18,60,42,.12);
+    }
+
+    *{
+        box-sizing:border-box;
+    }
+
+    html{
+        scroll-behavior:smooth;
+    }
+
+    body{
+        margin:0;
+        background:
+            radial-gradient(circle at top left, rgba(212,167,44,.13), transparent 30%),
+            linear-gradient(135deg,#f5f1e5 0%,#eef5ef 100%);
+        color:var(--texto);
+        font-family:"Kanit", Arial, sans-serif;
+        line-height:1.7;
+    }
+
+    body::before{
+        content:"♠  ♣  ♦  ♥";
+        display:block;
+        padding:14px;
+        text-align:center;
+        background:var(--verde-escuro);
+        color:#f8df83;
+        font-size:22px;
+        letter-spacing:16px;
+    }
+
+    h1{
+        max-width:1100px;
+        margin:38px auto 10px;
+        padding:28px 25px;
+        border-radius:20px;
+        background:linear-gradient(135deg,var(--verde-escuro),var(--verde));
+        color:#fff;
+        font-family:"Felipa",serif;
+        font-size:clamp(2rem,5vw,3.5rem);
+        font-weight:400;
+        line-height:1.15;
+        text-align:center;
+        box-shadow:var(--sombra);
+        text-shadow:2px 3px 0 rgba(0,0,0,.16);
+    }
+
+    h1 u{
+        text-decoration:none;
+    }
+
+    h2{
+        max-width:1100px;
+        margin:42px auto 18px;
+        padding:15px 22px;
+        border-left:7px solid var(--dourado);
+        border-radius:10px;
+        background:var(--verde-escuro);
+        color:#fff;
+        font-family:"Kanit",sans-serif;
+        font-size:1.65rem;
+        font-weight:600;
+        text-align:left;
+        box-shadow:0 5px 15px rgba(18,60,42,.10);
+    }
+
+    h3{
+        max-width:1050px;
+        margin:30px auto 12px;
+        padding:12px 18px;
+        border-radius:10px;
+        background:linear-gradient(90deg,var(--vermelho),#c44949);
+        color:#fff;
+        font-size:1.25rem;
+        letter-spacing:.5px;
+        box-shadow:0 4px 12px rgba(169,45,45,.15);
+    }
+
+    p, ol, li{
+        font-family:"Kanit",Arial,sans-serif;
+        font-weight:400;
+    }
+
+    body > p,
+    body > ol{
+        max-width:1000px;
+        margin:15px auto;
+        padding:0 20px;
+    }
+
+    ol{
+        padding-left:48px;
+    }
+
+    li{
+        margin:7px 0;
+    }
+
+    li::marker{
+        color:var(--verde);
+        font-weight:700;
+    }
+
+    b{
+        color:var(--verde-escuro);
+    }
+
+    table{
+        width:min(100% - 40px,1050px);
+        margin:22px auto;
+        border-collapse:separate;
+        border-spacing:0;
+        overflow:hidden;
+        border:1px solid rgba(31,107,72,.25);
+        border-radius:14px;
+        background:var(--branco);
+        box-shadow:var(--sombra);
+        text-align:center;
+    }
+
+    th,td{
+        padding:13px 15px;
+        border-right:1px solid rgba(31,107,72,.15);
+        border-bottom:1px solid rgba(31,107,72,.15);
+        font-family:"Kanit",Arial,sans-serif;
+        font-weight:400;
+        text-align:center;
+        vertical-align:middle;
+    }
+
+    th{
+        background:var(--verde-escuro);
+        color:#fff;
+        font-weight:600;
+    }
+
+    tr:nth-child(even) td{
+        background:#f6faf7;
+    }
+
+    tr:hover td{
+        background:#fff8df;
+        transition:.2s ease;
+    }
+
+    th:last-child,td:last-child{
+        border-right:none;
+    }
+
+    tr:last-child td{
+        border-bottom:none;
+    }
+
+    img{
+        max-width:100%;
+        height:auto;
+        border-radius:12px;
+        object-fit:contain;
+    }
+
+    table img{
+        display:block;
+        margin:auto;
+        max-height:400px;
+        box-shadow:0 8px 20px rgba(0,0,0,.12);
+    }
+
+    table td center{
+        color:#59645e;
+        font-size:.95rem;
+    }
+
+    /* Destaques */
+    h3 + ol{
+        max-width:1000px;
+        margin:0 auto;
+        padding:18px 45px 18px 58px;
+        background:var(--vermelho-claro);
+        border-left:5px solid var(--vermelho);
+        border-radius:0 12px 12px 0;
+    }
+
+    h3 + p{
+        max-width:1000px;
+        margin:0 auto 18px;
+    }
+
+    /* Área das imagens de modalidades */
+    table img[src*="dupla"],
+    table img[src*="quarteto"],
+    table img[src*="sexteto"]{
+        width:200px;
+        height:200px;
+        object-fit:contain;
+        box-shadow:none;
+    }
+
+    /* Caixa de atenção */
+    h3:has(+ p center){
+        text-align:center;
+        background:linear-gradient(90deg,var(--dourado),#e3bd54);
+        color:var(--verde-escuro);
+    }
+
+    /* Responsividade */
+    @media (max-width:700px){
+        body::before{
+            letter-spacing:7px;
+            font-size:17px;
+        }
+
+        h1{
+            margin:22px 14px 10px;
+            padding:22px 15px;
+        }
+
+        h2{
+            margin:28px 14px 15px;
+            font-size:1.35rem;
+        }
+
+        h3{
+            margin:22px 14px 10px;
+        }
+
+        body > p,
+        body > ol{
+            padding:0 18px;
+        }
+
+        table{
+            width:calc(100% - 28px);
+            font-size:.9rem;
+            overflow-x:auto;
+            display:table;
+        }
+
+        th,td{
+            padding:9px 7px;
+        }
+
+        ol{
+            padding-left:38px;
+        }
+    }
+
+    /* Pequenos efeitos visuais */
+    a{
+        color:var(--verde);
+    }
+
+    ::selection{
+        background:#f0d675;
+        color:var(--verde-escuro);
+    }
+</style>    
+
+</head>
+<body>
+
+<h1><u>GUIA DE APRENDIZADO PARA O TRUCO CEGO</u></h1>
+<h2>BARALHO ESPANHOL</h2>
+<p>
+Para jogar o truco gaúcho deve-se utilizar o baralho espanhol.
+<br>
+
+<table>
+<tr>
+    <th>
+    <img src="C:Users\Aluno\Pictures\amaral\aulas_de_html\aula_5\img\baralho.png" width="400px" height="400px">
+    </th>    
+</tr>
+<tr>
+    <td>
+    <center>Baralho espanhol convencional, 50 cartas.</center>
+    </td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3>ATENTE-SE AOS DETALHES</h3>
+<ol type="I">
+    <li>Remova os dois coringas;</li>
+    <li>Remova todos os 8 e todos os 9;</li>
+    <li>Sempre zele pelas cartas, relevos ou danificações serão observados por jogadores maliciosos, e isso lhes dará vantagem.</li>
+</ol>
+</p>
+
+<br>
+
+<h2>HIERARQUIA DAS CARTAS</h2>
+<p>
+A seguir, a ordem de todas cartas, do maior para o menor valor, respectivamente:
+</p>
+<ol type="a">
+<li>1 DE ESPADAS (espadão)</li>
+<li>1 DE PAUS (bastião)</li>
+<li>7 DE ESPADAS</li>
+<li>7 DE OUROS</li>
+Estas primeiras 4 são as cartas <u>ESPECIAIS</u> do jogo, também conhecidas como <b>MANILHAS</b>.
+<br> Elas ganham de qualquer carta abaixo.
+<li>TODOS os 3</li>
+<li>TODOS os 2</li>
+<li>o RESTO dos 1</li>
+"O resto", pois não são TODOS os 1.
+<br> Lembra que já citamos dois uns lá em cima, nas manilhas? Aqui embaixo temos o RESTO, que são o 1 DE OUROS e o 1 DE COPAS.
+<li>TODOS os 12(figura dos reis)</li>
+<li>TODOS os 11(FIGURA dos cavalos)</li>
+<li>TODOS os 10(figura dos sotas)</li>
+<li>o RESTO dos 7</li>
+<li>TODOS os 6</li>
+<li>TODOS os 5</li>
+<li>TODOS os 4</li>
+</ol>
+
+<p>
+    Aqui os naipes não possuem hierarquia. Logo, se eu puser um 1 de copas contra o teu 1 de ouros haverá um <b><u>EMPATE!</u></b>
+<br>Falaremos mais sobre os empates a seguir.
+</p>
+<br>
+<h2>MÃOS, VAZAS E TRUCO</h2>
+
+<p>
+Podemos jogar truco de 3 formas:
+<br><br> De mano (um contra um);
+<br> De par (dois contra dois);
+<br> De trio (três contra três).
+<br> Em cada modalidade o jogo possui regras específicas, mas a base é a mesma. Vamos explicar nesta guia o jogo <u>DE MANO</u>.
+
+</p>
+
+<br>
+<br>
+<center><table>
+<tr>
+    <th>
+    <img src="C:Users\Aluno\Pictures\amaral\aulas_de_html\aula_5\img\dupla.png" width="200px" height="200px">
+</th>
+<th>
+    <img src="C:Users\Aluno\Pictures\amaral\aulas_de_html\aula_5\img\quarteto.png" width="200px" height="200px">
+</th>
+<th>
+    <img src="C:Users\Aluno\Pictures\amaral\aulas_de_html\aula_5\img\sexteto.png" width="200px" height="200px">
+</th>
+</tr>
+<tr>
+    <td>De mano</td>
+    <td>De par</td>
+    <td>De trio</td>
+</tr>
+<tr>
+    <td colspan="3">As duplas e os trios sentam-se afastados um do outro, nunca um parceiro deve estar ao seu lado.
+        <br>Por isso o nome "Truco Cego", pois não vemos as cartas de nossos aliados.
+    </td>
+</tr>
+
+</table></center>
+<br>
+<br>
+
+<h3>MÃO</h3>
+<p>
+"Mão" é como chamamos a rodada neste jogo, "vaza" sãos as frações de rodada, ou seja, as etapas que devemos cumprir para que uma rodada (mão) seja concluída, e então vamos para a próxima.
+</p>
+<p>
+    Há também "O mão". Ele é o primeiro a jogar. Assim como há "O pé", que por sua vez, é o último a jogar.
+    <br> Cada jogador recebe 3 cartas, distribuídas pelo "pé". O pé deve se atentar a forma como distribui as cartas:
+</p>
+    <ol>
+        <li>Antes de começar a distribuir as cartas, o pé deve pedir para o jogador a sua ESQUERDA fazer um corte no maço (ou o jogador a sua frente, caso seja uma partida de mano);</li>
+        <li>Começa a entregar as cartas pelo jogador a direita e seguindo neste sentido, ou seja, anti-horário (ou a sua frente, caso seja uma partida de mano);</li>
+        <li>Deste modo, ele é o último a receber as cartas;</li>
+        <li>Após distribuir todas as cartas, o pé deve deixar o maço (resto do baralho) a sua direita e à esquerda do mão. Caso seja uma partida de mano, apenas estique seu braço direito para frente, de modo que o maço caia a esquerda do mão, assim indicando para ele que deve começar a vaza;</li>
+        Nas partidas de trio, as rodadas alternam entre <b>festa</b> e <b>testa</b>. Na festa, todos jogam. Na testa, ocorrem 3 disputas de mano (um contra um), sempre enfrentando o adversário que está a 2 jogadores de ti. ou seja, quem está do lado oposto da mesa.
+        <li>Portanto, somente nas partidas de trio, o pé deve anunciar qual o tipo de jogo terá aquela rodada, ou seja, deve cantar "FESTA!" ou "TESTA!", isto antes de largar o maço à direita;</li>
+    </ol>
+<p>
+    <br> O mão joga uma carta a mesa, o pé joga outra. A carta com maior valor hierárquico vence a vaza.
+    <br> Começa a próxima vaza quem ganhou a primeira.
+    <br> Se o jogador que ganhou a primeira vaza vencer a segunda, ali o jogo se encerra, pois como há 3 cartas, e são 3 disputas, quem ganhar 2 vence.
+</p>
+<h3>EMPATE</h3>
+<p>
+    Possíveis casos de empate:
+</p>
+<table>
+<tr>
+    <th>Empatar a primeira</th>
+    <th>Empatar a segunda</th>
+    <th>Empatar a terceira</th>
+    <th>Empatar a primeira e a segunda</th>
+    <th>Empatar todas as 3 vazas</th>
+</tr>
+<tr>
+    <td>Quem vencer a segunda, vence a mão.</td>
+    <td>Quem venceu a primeira, vence a mão.</td>
+    <td>Quem venceu a primeira, vence a mão.</td>
+    <td>Quem vencer a terceira, vence a mão.</td>
+    <td>Quem for O MÃO vence.</td>
+</tr>
+<tr>
+    <td colspan="5">Dica: Perceba que vencer a primeira vaza lhe dará vantagem.</td>
+</tr>
+</table>
+
+<h3>TRUCO</h3>
+<p>
+    Se nada for pedido, quem vencer aquela vaza leva apenas 1 ponto.
+<br>Uma partida de mano geralmente vai à 18 pontos.
+<br>Porém, para dar mais graça ao jogo, você pode desafiar o oponente lhe chamando para o <b><u>TRUCO!</u></b>
+<br><br>
+    Ao pedir TRUCO, o jogo pausa e deve-se esperar a resposta do adversário.
+<br>Ele pode responder:    
+    <table>
+        <tr>
+            <th>Quero</th>
+            <th>Não quero</th>
+            <th>Retruco</th>
+        </tr>
+        <tr>
+            <td>A mão passa a valer 2 pontos</td>
+            <td>Ele foge! E entrega 1 ponto somente para quem pediu o truco</td>
+            <td>Ele pede para aumentar a aposta para 3 pontos</td>
+        </tr>
+        <tr>
+            <td colspan="3">Aqui os papéis se invertem: agora o primeiro jogador deve responder ao RETRUCO do segundo jogador</td>
+        </tr>
+        <tr>
+            <td>Quero</td>
+            <td>Não quero</td>
+            <td>Quero Vale 4</td>
+        </tr>
+        <tr>
+            <td>A mão passa a valer 3 pontos</td>
+            <td>Ele foge! E entrega 2 pontos para quem pediu o retruco</td>
+            <td>Ele pede para aumentar a aposta para 4 pontos</td>
+        </tr>
+        <tr>
+            <td colspan="3">Aqui os papéis se invertem novamente: agora o segundo jogador deve responder ao "Quero Vale 4" do primeiro jogador</td>
+        </tr>
+        <tr>
+            <td>Quero</td>
+            <td colspan="2">Não quero</td>
+        </tr>
+        <tr>
+            <td>A mão passa a valer 4 pontos</td>
+            <td colspan="2">Ele foge! E entrega 3 pontos para quem pediu o "Quero vale 4"</td>
+        </tr>
+    </table>
+
+</p>
+<br><br>
+<h2>FLOR E ENVIDO</h2>
+<h3>DISPUTA PRELIMINAR</h3>
+<p>
+    Uma boa forma de pegar pontos do adversário é cantando ENVIDO ao início da partida, uma forma de disputa preliminar, ou seja, antes do jogo em si.
+<br>Nesta modalidade, ESQUEÇA o valor das cartas na hierarquia, o que importa aqui é o número dela, isso mesmo.
+<br>O 1 de espadas aqui não vale de muita coisa, pois seu valor é literal, vale somente 1. Enquanto o 4, que antes era rejeitado, vale mais que ele.
+<br>
+<br>O envido nada mais é que uma disputa para ver quem tem a maior carta em mãos.
+<br>
+<br>Porém, existem algumas regras para deixar o envido mais interessante:
+<br>
+<br>Lembras das figuras? Reis, cavalos e sotas? 10, 11 e 12 para facilitar. Aqui elas tem valor 0.
+<br>Não signifcam que não valham nada. E sim, que possuem valor 0. Cuidado.
+<br>
+<br>Duas cartas do mesmo naipe, lhe dão um bônus de 20 pontos, além da soma das mesmas.
+<br>Tome cuidado aqui com as figuras. Duas figuras de mesmo naipe valerão apenas 20 pontos. Pois seu valor individual é 0, então terá apenas o bônus de 20 pontos.
+</p>
+<p>
+    Hierarquia das cartas para o envido:
+    <ol type="a">
+        <li>7</li>
+        <li>6</li>
+        <li>5</li>
+        <li>4</li>
+        <li>3</li>
+        <li>2</li>
+        <li>1</li>
+        <li>12, 11, 10</li>
+    </ol>
+</p>
+<br>
+<h3><center>PERCEBA!</center></h3>
+<p>
+<center>
+Se cair com o 7 e o 6 terá o maior envido do jogo! Isto pois são as maiores cartas. "ENVIDO 33!".
+</center>
+</p>
+
+<h3>OUTRAS MODALIDADES E EMPATE</h3>
+<p>
+Nas demais modalidades, TODOS cantam seu envido, começando pelo MÃO.
+<br>O jogador que cantar o maior número, leva os pontos disputados dentro do envido e trás para a sua equipe.
+<br>Caso haja empate, ganha quem for da equipe do mão.
+<br>
+<br>Perceba que se você estiver na equipe do mão e tiver envido 33, a vitória é garantida. Então aumente o valor da rodada!
+<br>
+</p>
+<p>
+    Pontos do envido.
+<table>
+<tr>
+    <th colspan="3" >O jogador pede envido!</th>
+</tr>
+<tr>
+    <td colspan="3">O Adversário responde</td>
+</tr>
+<tr>
+    <td>Quero</td>
+    <td>Não quero</td>
+    <td>Envido</td>
+</tr>
+<tr>
+    <td>A disputa do envido começa, quem ganhar leva 2 pontos.</td>
+    <td>O jogador foge! Entregando 1 ponto somente para o adversário.</td>
+    <td>Aumenta a aposta com mais um envido, ou seja, ele quer que a aposta valha 4 pontos (envido + envido = 2 + 2)</td>
+</tr>
+</tr>
+</table>
+</p>
+<p>O mesmo vale para o Real-envido, que vale 3 ao invés de 2 pontos.
+<br> Em caso de aumento de aposta, a regra mantém, mas em caso de fuga, o jogador entrega para o adversário todos os pontos QUE JÁ ESTAVAM VALENDO antes da aposta, ou seja, se o primeiro jogador pede envido, ele está PEDINDO para a disputa valer 2 pontos. Se o segundo pedir envido em cima ou real-envido em cima, ele está na verdade aceitando os 2 pontos pra aposta e quer ainda mais! Ou seja, se fugir nesta etapa, vai perder os pontos que já estavam na mesa.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
